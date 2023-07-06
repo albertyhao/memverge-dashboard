@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Cases</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <main>
+        <div class="container text-center" id="page-title-div">
+            <p id="page-title">{{MODULENAME}} Test Cases {{TESTDATE}}</p>
+        </div>
+        <div class="container" id="test-status-menu-div">
+            <select class="test-status-menu-margins" name="test-status-menu" id="test-status-menu"> 
+                <option value="failed">Failed</option> 
+                <option value="skipped">Skipped</option>
+                <option value="passed">Passed</option>
+            </select>
+        </div>
+        <div class="container" id="tests-table-div">
+          {{TESTHTML}}
+        </div>
+    </main>
+  <script src="/app.js"></script>
+  </body>
+</html>

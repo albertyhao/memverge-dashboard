@@ -1,0 +1,95 @@
+main {
+    background: #68ADEC;
+    width: 100vw;
+    height: 100vh;
+}
+
+#page-title-div {
+    height: 10%;
+}
+
+#page-title {
+    margin: 5% 0% 5% 0%;
+    color: white;
+    font-size: 150%
+}
+
+#branch-menu-div, #test-status-menu-div {
+    height: 7%;
+}
+
+#branch-menu-label {
+    color: white;
+}
+
+#branch-menu, #test-status-menu {
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#results-table-div, #tests-table-div {
+    height: 83%;
+    width: 85%;
+    border-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white;
+    overflow: auto;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: left;
+    overflow: scroll;
+    
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    table-layout: fixed;
+    white-space: pre-wrap;
+}
+
+table th {
+    font-weight: bold;
+    padding: 10px;
+    letter-spacing: 1px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ccc;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Style table row borders */
+tr {
+    border-bottom: 1px solid grey;
+}
+
+/* Style table header cells */
+th {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Style alternating rows */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+table tr:hover td {
+    background-color: #D0E9FF;
+}
