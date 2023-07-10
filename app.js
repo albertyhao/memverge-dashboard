@@ -56,11 +56,11 @@ try {
 
 // GET route for the root URL
 app.get('/', async (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+  res.sendFile(path.join(__dirname, 'public/tests.html'));
 });
 
-app.get('/tests', async (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/tests.html'));
+app.get('/modules', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/modules.html'));
 });
 
 // exposes records data for frontend js
