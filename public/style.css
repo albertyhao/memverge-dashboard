@@ -8,6 +8,33 @@ main {
     height: 10%;
 }
 
+#modules-page-title-div {
+    height: 12%;
+}
+
+#modules-page-back-button {
+    height: 5%;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #ddd;
+}
+
+.back-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #333;
+}
+  
+
 #page-title {
     margin: 5% 0% 5% 0%;
     color: white;
@@ -29,7 +56,17 @@ main {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-#results-table-div, #tests-table-div {
+#tests-table-div, #builds-table-div {
+    height: 83%;
+    width: 85%;
+    border-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white;
+    overflow: auto;
+}
+
+#results-table-div {
     height: 83%;
     width: 85%;
     border-radius: 12px;
@@ -78,6 +115,7 @@ table td {
 /* Style table row borders */
 tr {
     border-bottom: 1px solid grey;
+    cursor: pointer;
 }
 
 /* Style table header cells */
@@ -92,4 +130,24 @@ tr:nth-child(even) {
 }
 table tr:hover td {
     background-color: #D0E9FF;
+}
+
+.failed-highlight {
+    background-color: #F16161;
+    border-radius: 3.5px;
+}
+
+.skipped-highlight {
+    background-color: #F1AF61;
+    border-radius: 3.5px;
+}
+
+.passed-highlight {
+    background-color: #47F66E;
+    border-radius: 3.5px;
+}
+
+.total-highlight {
+    background-color: #47CCF6;
+    border-radius: 3.5px;
 }

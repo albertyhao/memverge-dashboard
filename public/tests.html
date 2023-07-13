@@ -11,19 +11,43 @@
   <body>
     <main>
         <div class="container text-center" id="page-title-div">
-            <p id="page-title">{{MODULENAME}} Test Cases {{TESTDATE}}</p>
+            <p id="page-title">{{TITLE}} Test Cases {{DATE}}</p>
         </div>
         <div class="container" id="test-status-menu-div">
-            <select class="test-status-menu-margins" name="test-status-menu" id="test-status-menu"> 
-                <option value="failed">Failed</option> 
-                <option value="skipped">Skipped</option>
-                <option value="passed">Passed</option>
-            </select>
+          {{BUTTONURL}} <!-- link this -->
+          <select class="test-status-menu-margins" name="test-status-menu" id="test-status-menu"> 
+              <option value="all">All</option> 
+              <option value="FAILED">Failed</option> 
+              <option value="SKIPPED">Skipped</option>
+              <option value="PASSED">Passed</option>
+          </select>
         </div>
         <div class="container" id="tests-table-div">
-          {{TESTHTML}}
+          {{HTML}}
         </div>
     </main>
   <script src="/app.js"></script>
+  <script>
+    const filterDropdown = document.getElementById("test-status-menu");
+    const dataTable = document.getElementById("table");
+
+    filterDropdown.addEventListener("change", function() {
+      const selectedOption = this.value;
+      const tableRows = dataTable.getElementsByTagName("tr");
+
+      for (let i = 1; i < tableRows.length; i++) {
+        const row = tableRows[i];
+        const optionCell = row.getElementsByTagName("td")[2];
+
+        if (selectedOption === "all" || optionCell.textContent === selectedOption) {
+          row.style.display = ""; // Show the row
+        } else {
+          row.style.display = "none"; // Hide the row
+        }
+      }
+    });
+
+  
+  </script>
   </body>
 </html>

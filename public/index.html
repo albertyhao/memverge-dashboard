@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ATF Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <link rel="icon" href="./favicon.ico" type="image/x-icon"> -->
+  </head>
+  <body>
+    <main>
+        <div class="container text-center" id="page-title-div">
+            <p id="page-title">ATF Regression Testing Dashboard</p>
+        </div>
+        <div class="container" id="branch-menu-div">
+            <label class="branch-menu-margins" id="branch-menu-label">Release Branch: </label> 
+                <select class="branch-menu-margins" name="branch-menu" id="branch-menu"> 
+                    <option value="master-branch">Master Branch</option> 
+                    <option value="atf-dashboard">ATF Dashboard</option> 
+                </select>
+        </div>
+        <div class="container" id="builds-table-div">
+          <table id="table">
+            <!-- delete hard-coded table data after DB pulls are tested -->
+            <tr class='tRow'>
+              <th class='tHeader'>Date</th>
+              <th class='tHeader'>RedisSnapshot</th>
+              <th class='tHeader'>OtherTest</th>
+            </tr>
+            <tr class='tRow'>
+              <td class='tData'>06_27_2023</td>
+              <td class='tData'>Failed: 0| Skipped: 0| Passed: 18| Total: 18</td>
+              <td class='tData'>Failed: 0| Skipped: 0| Passed: 18| Total: 18</td>
+            </tr>
+            <tr class='tRow'>
+              <td class='tData'>06_26_2023</td>
+              <td class='tData'>Failed: 0| Skipped: 0| Passed: 18| Total: 18</td>
+              <td class='tData'>Failed: 0| Skipped: 0| Passed: 18| Total: 18</td>
+            </tr>
+          </table>
+        </div>
+    </main>
+  <script src="/app.js"></script>
+  <script src="index.js"></script>
+  </body>
+</html>

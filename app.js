@@ -39,7 +39,9 @@ const ResultSchema = new mongoose.Schema({
     platform: String,
     distro: String,
     mvmcli_version: String,
-    log_dir: String
+    log_dir: String,
+    buildid: String,
+    buildurl: String
   }
 });
 
@@ -53,41 +55,43 @@ try {
   console.log('Express App not defined');
 }
 
+// Helper functions to inject dynamic results data into modules/:buildid and tests/:testid routes
 
-// GET route for the root URL
-app.get('/', async (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/tests.html'));
-});
-
-app.get('/modules', async (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/modules.html'));
-});
-
-// exposes records data for frontend js
-app.get('/data', async (req, res) => {
-  try {
-    const records = await ResultModel.find();
-    console.log("Success: found records")
-    res.json(records); // Send the records data as JSON
-  } catch (error) {
-    console.error('Error fetching table records:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-app.get('/app.js', (req, res) => {
-  res.set('Content-Type', 'text/javascript');
-  res.sendFile(path.join(__dirname, 'app.js'));
-});
-
-// helper functions to inject dynamic test results data into tests/:testid route
-
-function injectHTML(file, moduleName, testDate, htmlContent) {
+function injectHTML(file, title, date, htmlContent, button) {
   const modifiedHTML = file
-    .replace('{{MODULENAME}}', moduleName)
-    .replace('{{TESTDATE}}', testDate)
-    .replace('{{TESTHTML}}', htmlContent)
+    .replace('{{TITLE}}', title)
+    .replace('{{DATE}}', date)
+    .replace('{{HTML}}', htmlContent)
+    .replace('{{BUTTONURL}}', button)
   return modifiedHTML;
+}
+
+function generateModulesHTML(filteredRecords){  
+  let modulesHTML = "<table id='table'><tr class='tRow'><th class='tHeader'>Test Module</th><th class='tHeader'>Distro</th><th class='tHeader failed-highlight'>Failed</th><th class='tHeader skipped-highlight'>Skipped</th><th class='tHeader passed-highlight'>Passed</th><th class='tHeader total-highlight'>Total</th></tr>";
+  filteredRecords.forEach((r) => {
+    let failed = 0; let passed = 0; let skipped = 0;
+    r["results"]["test_results"].forEach((r) => {
+      if (r == "PASSED") {
+        passed += 1;
+      }
+      else if (r == "FAILED") {
+        failed += 1;
+      }
+      else {
+        skipped += 1;
+      };
+    });
+    const testId = r["_id"];
+    const linkURL = `tests/${testId}`;
+    let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${r["module_name"]}</td><td class='tData'>${r["meta_data"]["distro"]}</td><td class='tData'>${failed}</td><td class='tData'>${skipped}</td><td class='tData'>${passed}</td><td class='tData'>${failed+skipped+passed}</td></tr>`;
+    modulesHTML += rowHTML;
+  })
+  
+  modulesHTML += "</table>";
+  buildName = filteredRecords[0]["meta_data"]["buildurl"].split("job/")[1].split("/").join(" ");
+  date = filteredRecords[0]["date"]; // change to most recent date associated with buildid after initial testing
+  return [buildName, date, modulesHTML];
+  
 }
 
 function generateTestsHTML(testData){
@@ -108,11 +112,68 @@ function generateTestsHTML(testData){
   return [moduleName, testDate, testHTML];
 }
 
-app.get('/tests/:testid', async (req, res) => {
-  const testId = req.params.testid;
+
+// GET route for the root URL
+app.get('/', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+app.get('/modules/:buildjob/:buildnum', async (req, res) => {
+  const buildid = "" + req.params.buildjob + "/" + req.params.buildnum + "/";
+  try {
+    const records = await ResultModel.find({}).exec();
+    const filteredRecords = records.filter((record) => {
+      const buildurl = record.meta_data?.buildurl;
+      const buildidFromURL = buildurl?.split("job/")[1];
+      return buildidFromURL === buildid;
+    });
+
+    if (filteredRecords.length === 0) {
+      console.log('No records found with the specified buildID ', buildid);
+      return res.status(404).send('Records Not Found');
+    }
+  
+    const generatedHTML = generateModulesHTML(filteredRecords);
+
+    fs.readFile(path.join(__dirname, 'public/modules.html'), 'utf8', (err, fileContent) => {
+      if (err) {
+        console.error('Error reading HTML file:', err);
+        return res.status(500).send('Internal Server Error');
+      }
+      
+      // Inject the generated HTML into the specified div
+      const injectedHTML = injectHTML(fileContent, ...generatedHTML); // passes array output of generateTestsHTML() into the injectHTML function
+      // Send the modified HTML response
+      res.send(injectedHTML);
+    }); 
+  } catch (error) {
+    console.error('Error fetching records:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Exposes records data for frontend js
+app.get('/data', async (req, res) => {
+  try {
+    const records = await ResultModel.find();
+    console.log("Success: found records")
+    res.json(records); // Send the records data as JSON
+  } catch (error) {
+    console.error('Error fetching table records:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/app.js', (req, res) => {
+  res.set('Content-Type', 'text/javascript');
+  res.sendFile(path.join(__dirname, 'app.js'));
+});
+
+app.get('/modules/:buildjob/:buildnum/tests/:testid', async (req, res) => {
+  const { buildjob, buildnum, testid } = req.params;
+  const testId = testid;
   try {
     const testData = await ResultModel.findOne({ _id: testId}).exec();
-    console.log("testdata ", testData)
     if (!testData) {
       console.log('No test document found with the specified _id ', testId);
       return res.status(404).send('Test Not Found');
@@ -127,6 +188,9 @@ app.get('/tests/:testid', async (req, res) => {
       }
       
       // Inject the generated HTML into the specified div
+      const buttonURL = "/modules/" + buildjob + "/" + buildnum + "/";
+      const button = `<a href="${buttonURL}" class="back-button">Back</a>`;
+      generatedHTML.push(button);
       const injectedHTML = injectHTML(fileContent, ...generatedHTML); // passes array output of generateTestsHTML() into the injectHTML function
       
       // Send the modified HTML response

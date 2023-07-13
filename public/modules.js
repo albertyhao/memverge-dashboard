@@ -1,3 +1,5 @@
+// OLD
+
 document.addEventListener("DOMContentLoaded", createDashboard);
 
 async function createDashboard() {
@@ -15,7 +17,7 @@ function generateTableHTML(records) {
   let headerHTML = "<tr class='tRow'><th class='tHeader'>Date</th>";
   const testModuleList = [];
   const testDateList = [];
-  console.log("records", records);
+  // console.log("records", records);
   records.forEach((r) => { 
     // add unique module names into list and generate html table header
     // store unique test dates for table
@@ -60,7 +62,6 @@ function generateTableHTML(records) {
     rowHTML += "</tr>";
     tableHTML += rowHTML;
   });
-  console.log(tableHTML);
   return tableHTML;
 }
 
