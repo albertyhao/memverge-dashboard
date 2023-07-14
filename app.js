@@ -98,12 +98,12 @@ function generateTestsHTML(testData){
   const moduleName = testData['module_name'];
   const testDate = testData['date'];
   
-  let testHTML = "<table id='table'><tr class='tRow'><th class='tHeader'>Test Name</th><th class='tHeader'>Test Description</th><th class='tHeader'>Test Result</th><th class='tHeader'>Test Exceptions</th><th class='tHeader'>Test Backtrace (bt)</th></tr>";
+  let testHTML = "<table id='table'><tr class='tRow testsRow'><th class='tHeader'>Test Name</th><th class='tHeader'>Test Description</th><th class='tHeader'>Test Result</th><th class='tHeader'>Test Exceptions</th><th class='tHeader'>Test Backtrace (bt)</th></tr>";
   
   for (let i = 0; i < testData['results']['test_names'].length; i++) {
     let rowHTML = "<tr class='tRow'>";
     Object.values(testData['results']).forEach((a) => {
-      rowHTML += `<td class='tData'>${a[i]}</td>`;
+      rowHTML += `<td class='tData'><div class="tests-row">${a[i]}</div></td>`;
     })
     rowHTML += "</tr>";
     testHTML += rowHTML;

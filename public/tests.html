@@ -28,6 +28,7 @@
     </main>
   <script src="/app.js"></script>
   <script>
+    // Filter table for failed, skipped, or passed tests
     const filterDropdown = document.getElementById("test-status-menu");
     const dataTable = document.getElementById("table");
 
@@ -45,6 +46,30 @@
           row.style.display = "none"; // Hide the row
         }
       }
+    });
+
+    // Allow user to expand/hide rows
+    const cells = document.querySelectorAll('.tData');
+    cells.forEach((cell) => {
+      const content = cell.querySelector('.tests-row');
+
+      if (content.scrollHeight > content.offsetHeight) {
+        const expandMessage = document.createElement('div');
+        expandMessage.classList.add('expand-message');
+        expandMessage.textContent = 'Click to Toggle';
+        cell.appendChild(expandMessage);
+        cell.addEventListener('mouseover', () => {
+          content.style.opacity = '0.2';
+        });
+
+        cell.addEventListener('mouseout', () => {
+          content.style.opacity = '';
+        });
+        cell.addEventListener('click', () => {
+          content.classList.toggle('expanded');
+        });
+      }
+
     });
 
   

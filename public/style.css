@@ -4,6 +4,7 @@ main {
     height: 100vh;
 }
 
+/* Segmenting page for divs */
 #page-title-div {
     height: 10%;
 }
@@ -12,48 +13,8 @@ main {
     height: 12%;
 }
 
-#modules-page-back-button {
-    height: 5%;
-}
-
-.back-button {
-    display: inline-block;
-    padding: 5px 15px;
-    background-color: #f1f1f1;
-    color: #333;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.back-button:hover {
-    background-color: #ddd;
-}
-
-.back-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px #333;
-}
-  
-
-#page-title {
-    margin: 5% 0% 5% 0%;
-    color: white;
-    font-size: 150%
-}
-
 #branch-menu-div, #test-status-menu-div {
     height: 7%;
-}
-
-#branch-menu-label {
-    color: white;
-}
-
-#branch-menu, #test-status-menu {
-    cursor: pointer;
-    border: 1px solid white;
-    border-radius: 3px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 #tests-table-div, #builds-table-div {
@@ -76,7 +37,78 @@ main {
     overflow: auto;
 }
 
+/* Styling back button */
+#modules-page-back-button {
+    height: 5%;
+}
 
+.back-button {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #ddd;
+}
+
+.back-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #333;
+}
+  
+/* Dropdown menu styling */
+#page-title {
+    margin: 5% 0% 5% 0%;
+    color: white;
+    font-size: 150%
+}
+
+#branch-menu-label {
+    color: white;
+}
+
+#branch-menu, #test-status-menu {
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling expanding/reducing table cells */
+.tData {
+    position: relative;
+}
+
+.tests-row {
+    max-height: 40px;
+    overflow: hidden;
+    transition: max-height 0.1s ease;
+}
+
+.tests-row.expanded {
+    max-height: none;
+}
+
+.expand-message {
+    color: black;
+    opacity: 0;
+    padding: 5px;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tData:hover .expand-message {
+    opacity: 1;
+}
+
+/* General table styling */
 table {
     border-collapse: collapse;
     width: 100%;
@@ -92,6 +124,7 @@ table {
 
     table-layout: fixed;
     white-space: pre-wrap;
+    word-break: break-word;
 }
 
 table th {
@@ -132,6 +165,7 @@ table tr:hover td {
     background-color: #D0E9FF;
 }
 
+/* Highlighting the test result statuses */
 .failed-highlight {
     background-color: #F16161;
     border-radius: 3.5px;
