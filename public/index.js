@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", createDashboard);
 
 async function createDashboard() {
   
-  // fetch from app.js data route
+  // fetch data from app.js data route
   const response = await fetch("/data");
   const records = await response.json();
   
@@ -16,7 +16,7 @@ function generateTableHTML(records) {
   console.log("records", records);
   records.forEach((r) => {
     // Generate buildlist with tuples of unique buildversions and earliest date associated with the build
-    // buildlist is a 2d array with elements [date, buildversion]
+    // buildlist is a 2d array with elements [date, buildURL, buildversion]
     const date = r["date"];
     const buildURL = r["meta_data"]["buildurl"];
     const buildVer = r["meta_data"]["mvmcli_version"];
@@ -39,7 +39,7 @@ function generateTableHTML(records) {
     
     const [monthB, dayB, yearB, hoursB, minutesB, secondsB] = b[0].split("_");
     const formattedDateB = new Date(`${yearB}/${monthB}/${dayB} ${hoursB}:${minutesB}:${secondsB}`);
-    console.log(formattedDateB - formattedDateA);
+
     return formattedDateB - formattedDateA;
   });
   
@@ -63,7 +63,8 @@ function resultSummary(url, records) {
 
   let failed = 0; let passed = 0; let skipped = 0;
   records.forEach((r) => {
-    try { // trying to prevent comparing null to url string
+    // trying to prevent comparing null to url string
+    try {
       if (r["meta_data"]["buildurl"] == url) {
         r["results"]["test_results"].forEach((r) => {
           if (r == "PASSED") {

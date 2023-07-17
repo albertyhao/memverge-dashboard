@@ -10,21 +10,33 @@
   </head>
   <body>
     <main>
-        <div class="container text-center" id="page-title-div">
-            <p id="page-title">{{TITLE}} Test Cases {{DATE}}</p>
+      <nav class="text-center navbar" id="navbar">
+        <div class="logo">
+          <img src="/img/memverge-logo.png" alt="Logo">
         </div>
+        <ul>
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/graph">Graph</a></li>
+        </ul>
+      </nav>
+      <div class="container text-center" id="tests-title-div">
         <div class="container" id="test-status-menu-div">
           {{BUTTONURL}} <!-- link this -->
-          <select class="test-status-menu-margins" name="test-status-menu" id="test-status-menu"> 
+          <select class="test-status-menu" name="test-status-menu" id="test-status-menu"> 
               <option value="all">All</option> 
               <option value="FAILED">Failed</option> 
               <option value="SKIPPED">Skipped</option>
               <option value="PASSED">Passed</option>
           </select>
         </div>
-        <div class="container" id="tests-table-div">
-          {{HTML}}
+        <div id="tests-title">
+          <p id="page-title">{{TITLE}} Test Cases {{DATE}}</p>
         </div>
+      </div>
+      
+      <div class="container" id="tests-table-div">
+        {{HTML}}
+      </div>
     </main>
   <script src="/app.js"></script>
   <script>

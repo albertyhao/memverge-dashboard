@@ -11,18 +11,24 @@
   </head>
   <body>
     <main>
-        <div class="container text-center" id="page-title-div">
-            <p id="page-title">ATF Regression Testing Dashboard</p>
+      <nav class="text-center navbar" id="navbar">
+        <div class="logo">
+          <img src="/img/memverge-logo.png" alt="Logo">
         </div>
-        <div class="container" id="branch-menu-div">
-            <label class="branch-menu-margins" id="branch-menu-label">Release Branch: </label> 
-                <select class="branch-menu-margins" name="branch-menu" id="branch-menu"> 
-                    <option value="master-branch">Master Branch</option> 
-                    <option value="atf-dashboard">ATF Dashboard</option> 
-                </select>
-        </div>
-        <div class="container" id="builds-table-div">
-          <table id="table">
+        <ul>
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/graph">Graph</a></li>
+        </ul>
+      </nav>
+      <div class="container" id="branch-menu-div">
+          <label class="branch-menu-margins" id="branch-menu-label">Release Branch: </label> 
+              <select class="branch-menu-margins" name="branch-menu" id="branch-menu"> 
+                  <option value="master-branch">Master Branch</option> 
+                  <option value="atf-dashboard">ATF Dashboard</option> 
+              </select>
+      </div>
+      <div class="container" id="builds-table-div">
+        <table id="table">
             <!-- delete hard-coded table data after DB pulls are tested
             <tr class='tRow'>
               <th class='tHeader'>Date</th>
@@ -41,7 +47,7 @@
             </tr>
             -->
           </table>
-        </div>
+      </div>
     </main>
   <script src="/app.js"></script>
   <script src="index.js"></script>

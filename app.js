@@ -54,6 +54,7 @@ try {
 } catch {
   console.log('Express App not defined');
 }
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // Helper functions to inject dynamic results data into modules/:buildid and tests/:testid routes
 
@@ -116,6 +117,10 @@ function generateTestsHTML(testData){
 // GET route for the root URL
 app.get('/', async (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+app.get('/graph', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/graph.html'));
 });
 
 app.get('/modules/:buildjob/:buildnum', async (req, res) => {

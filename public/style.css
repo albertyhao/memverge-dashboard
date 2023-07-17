@@ -5,20 +5,51 @@ main {
 }
 
 /* Segmenting page for divs */
-#page-title-div {
-    height: 10%;
+#navbar {
+    height: 7.5%;
+}
+
+#tests-title-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 9.5%;
+}
+
+#test-status-menu-div {
+    width: 20%;
+    max-width: 20%;
+}
+
+#tests-title {
+    width: 80%;
+    max-width: 80%;
 }
 
 #modules-page-title-div {
-    height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 9.5%;
 }
 
-#branch-menu-div, #test-status-menu-div {
+#branch-menu-div {
+    padding: 1%;
     height: 7%;
 }
 
-#tests-table-div, #builds-table-div {
+#tests-table-div {
     height: 83%;
+    width: 85%;
+    border-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white;
+    overflow: auto;
+}
+
+#builds-table-div {
+    height: 85.5%;
     width: 85%;
     border-radius: 12px;
     border-bottom-left-radius: 0;
@@ -37,11 +68,71 @@ main {
     overflow: auto;
 }
 
-/* Styling back button */
-#modules-page-back-button {
-    height: 5%;
+/* styling navbar */
+
+.navbar {
+    background-color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 !important;
 }
 
+.navbar .logo {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+    margin-right: 10px;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.navbar ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.navbar ul li:first-child {
+    margin-left: 0;
+}
+
+.navbar ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar ul li a:hover {
+    background-color: #68ADEC;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Styling back button */
 .back-button {
     display: inline-block;
     padding: 5px 15px;
@@ -49,6 +140,7 @@ main {
     color: #333;
     text-decoration: none;
     border-radius: 5px;
+    margin-right: 10px;
 }
 
 .back-button:hover {
@@ -62,9 +154,10 @@ main {
   
 /* Dropdown menu styling */
 #page-title {
-    margin: 5% 0% 5% 0%;
+    margin: 0;
+    padding: 3%;
     color: white;
-    font-size: 150%
+    font-size: 150%;
 }
 
 #branch-menu-label {
