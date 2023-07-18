@@ -1,0 +1,23 @@
+.divider {
+    height: 3%
+}
+
+#plot-container-div {
+    height: 90.5%;
+    width: 95%;
+    border-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+#plot-div {
+    width: 65%;
+}
+
+#plot-controls-div {
+    width: 35%;
+}
