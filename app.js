@@ -10,7 +10,7 @@ const fs = require('fs');
 // connect to database
 async function connectToMongoDB() {
   try {
-    await mongoose.connect('mongodb://10.0.1.56:27017/atf', {
+    await mongoose.connect('mongodb://10.0.0.33:27017/atf', {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
@@ -208,11 +208,10 @@ app.get('/modules/:buildjob/:buildnum/tests/:testid', async (req, res) => {
 
 });
 
-// start dashboard app server on 10.0.1.56/3000
+// start dashboard app server
 const PORT = 3000;
-const IP_ADDRESS = '10.0.1.56';
+const IP_ADDRESS = 'eagle.eng.memverge.com';
 
 app.listen(PORT, IP_ADDRESS, () => {
   console.log(`Server running at http://${IP_ADDRESS}:${PORT}/`);
 });
-

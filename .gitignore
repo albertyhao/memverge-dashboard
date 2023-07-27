@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/ 
+
+# Build artifacts 
+dist/
+build/
+
+# Logs and databases
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+
+# IDE files
+.idea/
+.vscode/
+
+# Allow package-lock.json
+!package-lock.json
