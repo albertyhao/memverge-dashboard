@@ -50,9 +50,21 @@ function generateTableHTML(records) {
   // create rows of data
   buildList.forEach((tuple) => {
     // Construct rowHTML with date, buildversion, and summary
-    const linkURL = `modules/${tuple[1].split("job/")[1]}`;
-    let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${tuple[0]}</td><td class='tData'>${tuple[1].split("job/")[1].split("/").join(" ")}</td><td class='tData'>${tuple[2]}</td><td class='tData'>${resultSummary(tuple[1], records)}</td></tr>`;
-    tableHTML += rowHTML;
+    if (tuple[1] == "[BUILDURL]"){
+      const job = "no_build_url";
+      const linkURL = `modules/${job}`;
+      console.log("tuple: ")
+      console.log(tuple)
+      let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${tuple[0]}</td><td class='tData'>${job.split("/").join(" ")}</td><td class='tData'>${tuple[2]}</td><td class='tData'>${resultSummary(tuple[1], records)}</td></tr>`;
+      tableHTML += rowHTML;
+    }
+    else {
+      const job = tuple[1].split("job/")[1];
+      const linkURL = `modules/${job}`;
+      let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${tuple[0]}</td><td class='tData'>${job.split("/").join(" ")}</td><td class='tData'>${tuple[2]}</td><td class='tData'>${resultSummary(tuple[1], records)}</td></tr>`;
+      tableHTML += rowHTML;
+    }
+    
   });
   console.log(tableHTML);
   return tableHTML;
