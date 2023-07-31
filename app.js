@@ -19,6 +19,31 @@ async function connectToMongoDB() {
     console.error('Error connecting to MongoDB:', error);
   }
 }
+
+// function with access control (waiting for Boran)
+
+async function connectToMongoDB() {
+  try {
+    const username = 'mvbot';
+    const password = 'mvtest123!';
+    const host = '10.0.0.33';
+    const port = 27017;
+    const database = 'atf';
+
+    // Construct the connection string with authentication
+    const connectionString = `mongodb://${username}:${password}@${host}:${port}/${database}`;
+
+    // Connect to MongoDB
+    await mongoose.connect(connectionString, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  }
+}
+
 connectToMongoDB();
 
 // mongoose schema to capture mongoDB data

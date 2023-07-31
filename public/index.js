@@ -55,13 +55,13 @@ function generateTableHTML(records) {
       const linkURL = `modules/${job}`;
       console.log("tuple: ")
       console.log(tuple)
-      let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${tuple[0]}</td><td class='tData'>${job.split("/").join(" ")}</td><td class='tData'>${tuple[2]}</td><td class='tData'>${resultSummary(tuple[1], records)}</td></tr>`;
+      let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${tuple[0]}</td><td class='tData'>${job.split("/").join(" | ")}</td><td class='tData'>${tuple[2]}</td><td class='tData'>${resultSummary(tuple[1], records)}</td></tr>`;
       tableHTML += rowHTML;
     }
     else {
       const job = tuple[1].split("job/")[1];
       const linkURL = `modules/${job}`;
-      let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${tuple[0]}</td><td class='tData'>${job.split("/").join(" ")}</td><td class='tData'>${tuple[2]}</td><td class='tData'>${resultSummary(tuple[1], records)}</td></tr>`;
+      let rowHTML = `<tr class='tRow' onclick="window.location.href = \`${linkURL}\`;"><td class='tData'>${tuple[0]}</td><td class='tData'>${job.split("/").join(" | ")}</td><td class='tData'>${tuple[2]}</td><td class='tData'>${resultSummary(tuple[1], records)}</td></tr>`;
       tableHTML += rowHTML;
     }
     
