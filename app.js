@@ -8,19 +8,6 @@ const fs = require('fs');
 // const { JSDOM } = require('jsdom');
 
 // connect to database
-async function connectToMongoDB() {
-  try {
-    await mongoose.connect('mongodb://10.0.0.33:27017/atf', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-    console.log('Connected to MongoDB');
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-  }
-}
-
-// function with access control (waiting for Boran)
 
 async function connectToMongoDB() {
   try {
